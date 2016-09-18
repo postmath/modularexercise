@@ -10,20 +10,16 @@ import java.util.ListIterator;
  *
  * Created by epostma on 2016-06-19.
  */
-public class ListExerciseFragment extends ExerciseFragment {
-    private List<ExerciseFragment> subfragments;
+public class IterableExerciseFragment extends ExerciseFragment implements Iterable<ExerciseFragment> {
+    private Iterable<ExerciseFragment> subfragments;
 
-    public ListExerciseFragment(String name, List<ExerciseFragment> subfragments) {
+    public IterableExerciseFragment(String name, Iterable<ExerciseFragment> subfragments) {
         super(name);
         this.setSubfragments(subfragments);
     }
 
-    public void setSubfragments(List<ExerciseFragment> subfragments) {
-        this.subfragments = new ArrayList<>(subfragments);
-    }
-
-    public ListIterator<ExerciseFragment> listIterator() {
-        return subfragments.listIterator();
+    public void setSubfragments(Iterable<ExerciseFragment> subfragments) {
+        this.subfragments = subfragments;
     }
 
     @Override
@@ -33,5 +29,10 @@ public class ListExerciseFragment extends ExerciseFragment {
             duration += exerciseFragment.getDuration();
         }
         return duration;
+    }
+
+    @Override
+    public Iterator<ExerciseFragment> iterator() {
+        return subfragments.iterator();
     }
 }
